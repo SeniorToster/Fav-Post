@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { Tokens } = require('../models');
 
 function generationTokens(payload) {
   const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
@@ -10,8 +11,13 @@ function generationTokens(payload) {
   return { accessToken, refreshToken };
 }
 
-async function updateToken(params) {
-  
+async function saveToken(userId, refreshToken) {
+  const tokenDB = await Tokens.findOne({ while: { user_id: userId } });
+  if (tokenDB) {
+    tokenDB.token = refreshToken;
+    return tokenDB.save();
+  }
+  return Tokens.create({ user_id: userId, token: refreshToken });
 }
 
-module.exports = { generationTokens };
+module.exports = { generationTokens, saveToken };

@@ -4,6 +4,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { Users } = require('./models');
 const router = require('./routers/user');
+const errorMiddleware = require('./middleware/error-middleware');
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api', router);
+
+app.use(errorMiddleware);
 
 app.get('/', async (req, res) => {
   const user = await Users.findOne({

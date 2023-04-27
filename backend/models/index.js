@@ -13,6 +13,9 @@ const sequelize = new Sequelize(
 );
 
 const Users = require('./Users')(sequelize, Sequelize.DataTypes);
+const Tokens = require('./Tokens')(sequelize, Sequelize.DataTypes);
+
+Users.hasOne(Tokens, { as: 'token', foreignKey: 'user_id' });
 
 (async function () {
   try {
@@ -23,4 +26,4 @@ const Users = require('./Users')(sequelize, Sequelize.DataTypes);
   }
 })();
 
-module.exports = { Users };
+module.exports = { Users, Tokens };

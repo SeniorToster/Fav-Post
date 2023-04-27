@@ -1,21 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
   return sequelize.define(
-    'users',
+    'tokens',
     {
-      id: {
+      user_id: {
         type: DataTypes.STRING,
-        allowNull: false,
         primaryKey: true,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      password: {
+      token: {
         type: DataTypes.STRING,
         allowNull: false,
       },

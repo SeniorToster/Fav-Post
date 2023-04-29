@@ -12,7 +12,7 @@ function generationTokens(payload) {
 }
 
 async function saveToken(userId, refreshToken) {
-  const tokenDB = await Tokens.findOne({ while: { user_id: userId } });
+  const tokenDB = await Tokens.findOne({ where: { user_id: userId } });
   if (tokenDB) {
     tokenDB.token = refreshToken;
     return tokenDB.save();
@@ -20,4 +20,9 @@ async function saveToken(userId, refreshToken) {
   return Tokens.create({ user_id: userId, token: refreshToken });
 }
 
-module.exports = { generationTokens, saveToken };
+async function removeToken(refreshToken) {
+  await Tokens.destroy({ where: { token: refreshToken } });
+  return;
+}
+
+module.exports = { generationTokens, saveToken, removeToken };

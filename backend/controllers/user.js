@@ -2,7 +2,11 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const { validationResult } = require('express-validator');
 
-const { generationTokens, saveToken } = require('../service/token-service');
+const {
+  generationTokens,
+  saveToken,
+  removeToken,
+} = require('../service/token-service');
 const { apiError } = require('../service/error-service');
 const { Users } = require('../models');
 
@@ -103,4 +107,15 @@ async function loginUser(req, res, next) {
   }
 }
 
-module.exports = { registrationUser, loginUser };
+async function logoutUser(req, res, next) {
+  try {
+    const { refreshToken = '' } = req.cookies;
+    await removeToken(refreshToken);
+    res.clearCookie('refreshToken');
+    return res.status(200).json({ status: 200, message: 'logout' });
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { registrationUser, loginUser, logoutUser };

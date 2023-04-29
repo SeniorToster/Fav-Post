@@ -1,6 +1,10 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
-const { registrationUser, loginUser } = require('../controllers/user');
+const {
+  registrationUser,
+  loginUser,
+  logoutUser,
+} = require('../controllers/user');
 
 const router = new Router();
 
@@ -17,7 +21,7 @@ router.post(
   body('password').isLength({ min: 8, max: 36 }),
   loginUser
 );
-router.post('/logout');
+router.post('/logout', logoutUser);
 router.get('/refresh');
 router.get('/users');
 

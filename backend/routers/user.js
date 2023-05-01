@@ -4,7 +4,10 @@ const {
   registrationUser,
   loginUser,
   logoutUser,
+  refreshTokenUser,
+  usersAll,
 } = require('../controllers/user');
+const authMiddleware = require('../middleware/auth-middleware');
 
 const router = new Router();
 
@@ -21,8 +24,8 @@ router.post(
   body('password').isLength({ min: 8, max: 36 }),
   loginUser
 );
-router.post('/logout', logoutUser);
-router.get('/refresh');
-router.get('/users');
+router.get('/logout', logoutUser);
+router.get('/refresh', refreshTokenUser);
+router.get('/users', authMiddleware, usersAll);
 
 module.exports = router;

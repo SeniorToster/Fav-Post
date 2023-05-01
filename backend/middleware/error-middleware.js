@@ -1,6 +1,4 @@
 module.exports = function (err, req, res, next) {
-  console.log(err);
-
   if (err instanceof Object) {
     return res
       .status(err.status)

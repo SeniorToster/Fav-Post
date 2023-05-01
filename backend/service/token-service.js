@@ -11,6 +11,24 @@ function generationTokens(payload) {
   return { accessToken, refreshToken };
 }
 
+function validateRefreshToken(token) {
+  try {
+    const data = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
+function validateAccessToken(token) {
+  try {
+    const data = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+    return data;
+  } catch (e) {
+    return null;
+  }
+}
+
 async function saveToken(userId, refreshToken) {
   const tokenDB = await Tokens.findOne({ where: { user_id: userId } });
   if (tokenDB) {
@@ -25,4 +43,16 @@ async function removeToken(refreshToken) {
   return;
 }
 
-module.exports = { generationTokens, saveToken, removeToken };
+async function findToken(token) {
+  const tokenDB = await Tokens.findOne({ where: { token } });
+  return tokenDB;
+}
+
+module.exports = {
+  generationTokens,
+  saveToken,
+  removeToken,
+  validateRefreshToken,
+  validateAccessToken,
+  findToken,
+};

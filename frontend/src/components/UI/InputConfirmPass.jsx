@@ -1,10 +1,17 @@
+import PropTypes from 'prop-types';
+import { LockOutlined } from '@ant-design/icons';
 import { Form, Input } from 'antd';
 
-function InputConfirmPass() {
+InputConfirmPass.propTypes = {
+  name: PropTypes.string.isRequired,
+  dependencies: PropTypes.array.isRequired
+};
+
+function InputConfirmPass({ name, dependencies }) {
   return (
     <Form.Item
-      name='confirm'
-      dependencies={['password']}
+      name={name}
+      dependencies={dependencies}
       hasFeedback
       rules={[
         {
@@ -23,7 +30,11 @@ function InputConfirmPass() {
         }),
       ]}
     >
-      <Input.Password placeholder='Confirm password ' />
+      <Input.Password
+        size='large'
+        prefix={<LockOutlined className='site-form-item-icon' />}
+        placeholder='Confirm password '
+      />
     </Form.Item>
   );
 }

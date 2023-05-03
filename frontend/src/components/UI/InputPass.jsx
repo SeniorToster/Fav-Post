@@ -1,18 +1,27 @@
+import PropTypes from 'prop-types';
+import { LockOutlined } from '@ant-design/icons';
 import { Form, Input } from 'antd';
 
-function InputPass() {
+InputPass.propTypes = {
+  name: PropTypes.string.isRequired,
+};
+
+function InputPass({ name }) {
   return (
     <Form.Item
-      name='password'
+      name={name}
       rules={[
         {
           required: true,
           message: 'Please input your password!',
         },
       ]}
-      hasFeedback
     >
-      <Input.Password placeholder='Password' />
+      <Input.Password
+        size='large'
+        prefix={<LockOutlined className='site-form-item-icon' />}
+        placeholder='Password'
+      />
     </Form.Item>
   );
 }

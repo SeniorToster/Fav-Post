@@ -1,21 +1,20 @@
+import { UserOutlined } from '@ant-design/icons';
 import { Form, Input } from 'antd';
 
 // eslint-disable-next-line react/prop-types
-function InputText({ placeholder}) {
+function InputText() {
   return (
     <Form.Item
       name='nickname'
-      label='Nickname'
-      tooltip='What do you want others to call you?'
       rules={[
         {
           required: true,
-          message: 'Please input your nickname!',
+          message: `Please input your NickName!`,
           whitespace: true,
         },
       ]}
     >
-      <Input placeholder={placeholder} />
+      <Input placeholder={'NickName'} size='large' prefix={<UserOutlined />} />
     </Form.Item>
   );
 }

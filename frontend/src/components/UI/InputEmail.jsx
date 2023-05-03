@@ -1,4 +1,5 @@
 import { Form, Input } from 'antd';
+import { MailOutlined } from '@ant-design/icons';
 
 function InputEmail() {
   return (
@@ -15,7 +16,7 @@ function InputEmail() {
         },
       ]}
     >
-      <Input placeholder='E-mail' />
+      <Input size='large' prefix={<MailOutlined />} placeholder='E-mail' />
     </Form.Item>
   );
 }

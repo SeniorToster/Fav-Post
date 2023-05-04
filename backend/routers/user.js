@@ -15,7 +15,7 @@ router.post(
   '/registration',
   body('email').isEmail(),
   body('password').isLength({ min: 8, max: 36 }),
-  body('name').isLength({ min: 2, max: undefined }).isAlphanumeric(),
+  body('name').isLength({ min: 2, max: 36 }).isAlphanumeric(),
   registrationUser
 );
 router.post(

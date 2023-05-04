@@ -1,34 +1,26 @@
 import { Button, Card, Form, Space, Typography } from 'antd';
+import { Link} from 'react-router-dom';
+
 import styles from './auth.module.scss';
+import { useLoginMutation } from '../../features/auth/authApiSlice';
+
 import InputEmail from '../../components/UI/InputEmail';
 import InputPass from '../../components/UI/InputPass';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { useLoginMutation } from '../../features/auth/authApiSlice';
-import { actionsAuth } from '../../features/auth/authSlice';
+import Alert from '../../components/UI/Alert';
+import useAuth from '../../features/hook/useAuth';
 
 function Login() {
-  const dispatch = useDispatch();
   const [login] = useLoginMutation();
-  const navigate = useNavigate();
-  const onSubmitHandle = async values => {
-    try {
-      const userData = await login(values).unwrap();
-      console.log(userData);
-      dispatch(actionsAuth.setCredential(userData));
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [onSubmit, error] = useAuth(login);
 
   return (
     <div className={styles.wrapper}>
       <Card style={{ width: 400 }} title='Authorization'>
-        <Form onFinish={onSubmitHandle}>
+        <Form onFinish={onSubmit}>
           <InputEmail />
           <InputPass name={'password'} />
-          <Space direction='vertical'>
+          <Space direction='vertical' style={{ width: '100%' }}>
+            {error && <Alert type='error' message={error} />}
             <Button type='primary' htmlType='submit'>
               Log in
             </Button>

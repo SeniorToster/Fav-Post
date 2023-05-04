@@ -5,7 +5,7 @@ import { Form, Input } from 'antd';
 function InputText() {
   return (
     <Form.Item
-      name='nickname'
+      name='name'
       rules={[
         {
           required: true,

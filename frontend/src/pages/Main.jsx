@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/auth/authSlice';
 import { useUsersQuery } from '../features/auth/authApiSlice';
-import { Space, Spin, Typography } from 'antd';
+import { Card, Col, Row, Space, Spin, Tag, Typography } from 'antd';
 
 function Main() {
   const user = useSelector(selectUser);
@@ -13,12 +13,22 @@ function Main() {
   if (user)
     return (
       <>
-        <Typography.Title>вы {user.name} авторизованы</Typography.Title>
-        <Space direction='vertical'>
-          {data.map(user => (
-            <Typography.Text key={user.id}>{user.email}</Typography.Text>
-          ))}
-        </Space>
+        <Row gutter={[16, 0]} wrap={'false'}>
+          <Col flex='auto'>
+            <Typography.Title>вы {user.name} авторизованы</Typography.Title>
+          </Col>
+          <Col flex='none'>
+            <Card title='Registered Users' style={{ width: 300 }}>
+              <Space size={4} wrap={'true'}>
+                {data.map(user => (
+                  <Tag bordered={false} key={user.id}>
+                    {user.name}
+                  </Tag>
+                ))}
+              </Space>
+            </Card>
+          </Col>
+        </Row>
       </>
     );
 

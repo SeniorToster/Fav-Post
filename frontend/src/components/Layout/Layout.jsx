@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 import CustomHeader from './Header/Header';
-import { Col, Layout, Row, Spin } from 'antd';
+import { Layout, Spin } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import { useRefreshQuery } from '../../features/auth/authApiSlice';
 
@@ -13,14 +13,13 @@ function CustomLayout() {
       style={{
         backgroundColor: '#141414',
         height: '100vh',
+        padding: '0 20px',
+        maxWidth: '1220px',
+        margin: '0 auto',
       }}
     >
-      <Row>
-        <Col span={20} offset={2}>
-          <CustomHeader />
-          <Content>{isLoading ? <Spin size='large' /> : <Outlet />}</Content>
-        </Col>
-      </Row>
+      <CustomHeader />
+      <Content>{isLoading ? <Spin size='large' /> : <Outlet />}</Content>
     </Layout>
   );
 }

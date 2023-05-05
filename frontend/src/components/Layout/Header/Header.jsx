@@ -1,4 +1,4 @@
-import { Button, Space, Typography } from 'antd';
+import { Avatar, Button, Space, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import styles from './header.module.scss';
 import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
@@ -25,11 +25,15 @@ function CustomHeader() {
       <Space>
         {user ? (
           <>
-            <Typography.Text>{user.name}</Typography.Text>
+            <Avatar gap={'4'}>{user.name[0].toUpperCase()}</Avatar>
+            <Typography.Title style={{ margin: '0' }} level={4}>
+              {user.name}
+            </Typography.Title>
             <Button
               onClick={logoutHandle}
               icon={<LogoutOutlined />}
               type='primary'
+              ghost
             >
               Logout
             </Button>

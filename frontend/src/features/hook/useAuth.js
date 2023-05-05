@@ -12,7 +12,7 @@ function useAuth(api) {
     try {
       setError('');
       const userData = await api(values).unwrap();
-      dispatch(actionsAuth.setCredential(userData));
+      dispatch(actionsAuth.setCredential({ ...userData }));
       navigate('/');
     } catch (err) {
       console.log(err);

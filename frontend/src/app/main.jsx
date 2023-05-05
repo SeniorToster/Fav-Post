@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { ConfigProvider, theme } from 'antd';
@@ -12,9 +11,6 @@ import Login from '../pages/Auth/Login.jsx';
 import Registration from '../pages/Auth/Registration.jsx';
 import Layout from '../components/Layout/Layout';
 import Error404 from '../pages/Error404';
-
-
-
 
 const router = createBrowserRouter([
   {
@@ -41,15 +37,13 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ConfigProvider
-        theme={{
-          algorithm: theme.darkAlgorithm,
-        }}
-      >
-        <RouterProvider router={router} />
-      </ConfigProvider>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <ConfigProvider
+      theme={{
+        algorithm: theme.darkAlgorithm,
+      }}
+    >
+      <RouterProvider router={router} />
+    </ConfigProvider>
+  </Provider>
 );

@@ -8,8 +8,6 @@ const {
 } = require('../service/user-service');
 const { removeToken } = require('../service/token-service');
 
-
-
 async function registrationUser(req, res, next) {
   try {
     const errors = validationResult(req);
@@ -23,6 +21,8 @@ async function registrationUser(req, res, next) {
     res.cookie('refreshToken', userData.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
+      secure: true,
+      sameSite: 'None',
     });
 
     return res.json(userData);
@@ -30,8 +30,6 @@ async function registrationUser(req, res, next) {
     next(error);
   }
 }
-
-
 
 async function loginUser(req, res, next) {
   try {
@@ -46,6 +44,8 @@ async function loginUser(req, res, next) {
     res.cookie('refreshToken', userData.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
+      secure: true,
+      sameSite: 'None',
     });
 
     return res.json(userData);
@@ -53,8 +53,6 @@ async function loginUser(req, res, next) {
     next(error);
   }
 }
-
-
 
 async function logoutUser(req, res, next) {
   try {
@@ -69,13 +67,17 @@ async function logoutUser(req, res, next) {
   }
 }
 
-
-
 async function refreshTokenUser(req, res, next) {
   try {
     const { refreshToken = '' } = req.cookies;
-
     const userData = await refreshService(refreshToken);
+
+    res.cookie('refreshToken', userData.refreshToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None',
+      maxAge: 24 * 60 * 60 * 1000,
+    });
     return res.json(userData);
   } catch (error) {
     next(error);
@@ -90,10 +92,6 @@ async function usersAll(req, res, next) {
     next(error);
   }
 }
-
-
-
-
 
 module.exports = {
   registrationUser,

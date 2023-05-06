@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = new Sequelize(
   process.env.BD_DATABASE,
@@ -11,14 +11,12 @@ const sequelize = new Sequelize(
     dialect: 'postgres',
   }
 );
+module.exports = { DataTypes, sequelize };
 
-const Users = require('./Users')(sequelize, Sequelize.DataTypes);
-const Tokens = require('./Tokens')(sequelize, Sequelize.DataTypes);
-const Posts = require('./Posts')(sequelize, Sequelize.DataTypes);
-
-module.exports = { Users, Tokens, Posts };
-
-const LikesPosts = require('./LikesPosts')(sequelize, Sequelize.DataTypes);
+const Users = require('./Users');
+const Tokens = require('./Tokens');
+const Posts = require('./Posts');
+const LikesPosts = require('./LikesPosts');
 
 Users.hasOne(Tokens, { as: 'token', foreignKey: 'user_id' });
 Posts.hasOne(Users, {
@@ -44,11 +42,14 @@ Posts.belongsToMany(Users, {
   try {
     await sequelize.authenticate();
     console.log('Соединение успешно установлено.');
-    const post = await Posts.findAll({
-      include: ['likes', 'ownerUser'],
+
+    /*     const likeBD = await LikesPosts.findOne({
+      where: { postId: '1', userId: '90d1a437-417f-40d1-9de0-c7f0e98b5773' },
     });
-    console.log(post);
+ */
   } catch (error) {
     console.error('Не удается подключиться к базе данных:', error);
   }
 })();
+
+module.exports = { Users, Tokens, Posts, LikesPosts };

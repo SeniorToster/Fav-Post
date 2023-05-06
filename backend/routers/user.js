@@ -26,6 +26,9 @@ router.post(
 );
 router.get('/logout', logoutUser);
 router.get('/refresh', refreshTokenUser);
-router.get('/users', authMiddleware, usersAll);
+router.get('/users', usersAll);
+
+/* router.get('/userPosts', userPosts);
+router.get('/userLikes', userLikes); */
 
 module.exports = router;

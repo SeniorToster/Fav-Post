@@ -5,15 +5,15 @@ module.exports = function AuthMiddleware(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader) return next(apiError.unauthorizedError());
+    if (!authHeader) throw apiError.unauthorizedError();
 
     const accessToken = authHeader.split(' ')[1];
 
-    if (!accessToken) return next(apiError.unauthorizedError());
+    if (!accessToken) throw apiError.unauthorizedError();
 
     const userData = validateAccessToken(accessToken);
 
-    if (!userData) return next(apiError.unauthorizedError());
+    if (!userData) throw apiError.unauthorizedError();
 
     req.user = userData;
     return next();

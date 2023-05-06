@@ -73,8 +73,6 @@ async function loginService(email, password) {
   };
 }
 
-
-
 async function refreshService(refreshToken) {
   if (!refreshToken) throw apiError.unauthorizedError();
 
@@ -95,12 +93,10 @@ async function refreshService(refreshToken) {
   };
 }
 
-
-
 async function usersService() {
-  const users = await Users.findAll()
+  const users = await Users.findAll();
 
- return users;
+  return users;
 }
 
 module.exports = {

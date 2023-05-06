@@ -1,5 +1,5 @@
 module.exports = function (err, req, res, next) {
-  if (err instanceof Object) {
+  if (err?.message) {
     return res
       .status(err.status)
       .json({ message: err.message, errors: err.errors });

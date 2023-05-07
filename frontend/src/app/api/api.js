@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
 import { actionsAuth } from '../../features/auth/authSlice';
+
+
 
 const fetchBase = fetchBaseQuery({
   baseUrl: 'http://localhost:3000/api/',
@@ -34,7 +35,7 @@ const fetchBaseWithReauth = async (args, api, extraOptions) => {
   return result;
 };
 
-export const apiSlice = createApi({
+export const api = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseWithReauth,
   endpoints: builder => ({}),

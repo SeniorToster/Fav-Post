@@ -1,6 +1,6 @@
-import { apiSlice } from '../../app/api/apiSlice';
+import { api } from '../../app/api/api';
 
-const AuthApiSlice = apiSlice.injectEndpoints({
+export const authApiSlice = api.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: credential => ({
@@ -44,4 +44,8 @@ export const {
   useRefreshQuery,
   useUsersQuery,
   useLazyLogoutQuery,
-} = AuthApiSlice;
+} = authApiSlice;
+
+export const {
+  endpoints: { login, registration, refresh },
+} = authApiSlice;

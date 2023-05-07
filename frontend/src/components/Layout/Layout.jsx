@@ -3,10 +3,19 @@ import CustomHeader from './Header/Header';
 import { Layout, Spin } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import { useRefreshQuery } from '../../features/auth/authApiSlice';
+import { useDispatch } from 'react-redux';
+import { actionsAuth } from '../../features/auth/authSlice';
+import { useEffect } from 'react';
 
 function CustomLayout() {
-  const { isLoading } = useRefreshQuery();
-  console.log(isLoading);
+  const { data, isSuccess, isLoading } = useRefreshQuery();
+  const dispatch = useDispatch();
+  console.log(isSuccess);
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(actionsAuth.setCredential({ ...data }));
+    }
+  }, [isSuccess]);
 
   return (
     <Layout
@@ -18,8 +27,16 @@ function CustomLayout() {
         margin: '0 auto',
       }}
     >
-      <CustomHeader />
-      <Content>{isLoading ? <Spin size='large' /> : <Outlet />}</Content>
+      {isLoading ? (
+        <Spin size='large' />
+      ) : (
+        <>
+          <CustomHeader />
+          <Content>
+            <Outlet />
+          </Content>
+        </>
+      )}
     </Layout>
   );
 }

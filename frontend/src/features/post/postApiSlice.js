@@ -1,6 +1,6 @@
-import { apiSlice } from '../../app/api/apiSlice';
+import { api } from '../../app/api/api';
 
-const postApiSlice = apiSlice.injectEndpoints({
+const postApiSlice = api.injectEndpoints({
   endpoints: builder => ({
     posts: builder.query({
       query: () => ({

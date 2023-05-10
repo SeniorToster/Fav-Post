@@ -10,11 +10,12 @@ import { useEffect } from 'react';
 function CustomLayout() {
   const { data, isSuccess, isLoading } = useRefreshQuery();
   const dispatch = useDispatch();
-  console.log(isSuccess);
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(actionsAuth.setCredential({ ...data }));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   return (

@@ -1,5 +1,10 @@
-const { postsAllService, likeService } = require('../service/post-service');
-
+const { validationResult } = require('express-validator');
+const {
+  postsAllService,
+  likeService,
+  postCreateService,
+} = require('../service/post-service');
+const { apiError } = require('../service/error-service');
 async function postsAll(req, res, next) {
   try {
     const postsData = await postsAllService();
@@ -20,5 +25,22 @@ async function postLike(req, res, next) {
     next(e);
   }
 }
+async function postsCreate(req, res, next) {
+  try {
+    const errors = validationResult(req);
 
-module.exports = { postsAll, postLike };
+    if (!errors.isEmpty()) {
+      throw apiError.badRequest('Ошибка валидации', errors.array());
+    }
+
+    const user = req.user;
+    const { title, description } = req.body;
+    await postCreateService(user, title, description);
+
+    res.status(200).send('');
+  } catch (e) {
+    next(e);
+  }
+}
+
+module.exports = { postsAll, postLike, postsCreate };

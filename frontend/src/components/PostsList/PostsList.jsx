@@ -4,7 +4,7 @@ import Post from '../Post/Post';
 
 function PostsList() {
   const { data, isLoading, isFetching } = usePostsQuery();
-
+  console.log(data);
   if (isLoading || isFetching) return <Spin />;
 
   return (

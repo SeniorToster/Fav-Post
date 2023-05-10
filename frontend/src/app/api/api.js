@@ -2,8 +2,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { actionsAuth } from '../../features/auth/authSlice';
 
-
-
 const fetchBase = fetchBaseQuery({
   baseUrl: 'http://localhost:3000/api/',
   credentials: 'include',
@@ -38,5 +36,6 @@ const fetchBaseWithReauth = async (args, api, extraOptions) => {
 export const api = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseWithReauth,
+  tagTypes: ['post'],
   endpoints: builder => ({}),
 });

@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Form, Input, Space } from 'antd';
+import { Avatar, Button, Card, Form, Input } from 'antd';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../features/auth/authSlice';
 import TextArea from 'antd/es/input/TextArea';
@@ -24,7 +24,7 @@ function PostCreate() {
   return (
     user && (
       <Card>
-        <Space align='start'>
+        <div style={{ display: 'flex', width: '100%' }}>
           <Avatar gap={4}>{user.name[0].toUpperCase()}</Avatar>
           <Form
             onFinish={onSubmitHandle}
@@ -32,6 +32,7 @@ function PostCreate() {
             onFocus={() => {
               setFocused(true);
             }}
+            style={{ width: '100%' }}
           >
             <Form.Item
               name='title'
@@ -72,7 +73,7 @@ function PostCreate() {
               </>
             )}
           </Form>
-        </Space>
+        </div>
       </Card>
     )
   );

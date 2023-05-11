@@ -1,7 +1,12 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
 const authMiddleware = require('../middleware/auth-middleware');
-const { postsAll, postLike, postsCreate } = require('../controllers/post');
+const {
+  postsAll,
+  postLike,
+  postsCreate,
+  postDelete,
+} = require('../controllers/post');
 
 const router = new Router();
 
@@ -14,7 +19,6 @@ router.post(
   body('description').isLength({ min: 3, max: 1000 }),
   postsCreate
 );
-/* router.delete('/post:postId', authMiddleware, postsDelete);
- */
+router.delete('/post/:postId', authMiddleware, postDelete);
 
 module.exports = router;

@@ -73,7 +73,22 @@ async function postCreateService(user, title, description) {
   return;
 }
 
-module.exports = { postsAllService, likeService, postCreateService };
+async function postDeleteService(user, postId) {
+  const post = await Posts.destroy({
+    where: {
+      id: postId,
+      owner_post: user.id,
+    },
+  })
+  return;
+}
+
+module.exports = {
+  postsAllService,
+  likeService,
+  postCreateService,
+  postDeleteService,
+};
 
 /*const likeBD = await Posts.findOne({
       where: { id: '3' },

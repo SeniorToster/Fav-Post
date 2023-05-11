@@ -33,6 +33,7 @@ const postApiSlice = api.injectEndpoints({
         url: `/post/${postId}`,
         method: 'DELETE',
       }),
+      invalidatesTags: ['post'],
     }),
     postLiked: builder.mutation({
       query: postId => ({

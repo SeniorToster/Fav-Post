@@ -4,12 +4,12 @@ const {
   postsAllService,
   likeService,
   postCreateService,
+  postDeleteService,
 } = require('../service/post-service');
 const { apiError } = require('../service/error-service');
 
 async function postsAll(req, res, next) {
   try {
-    console.log(req.query);
     const postsData = await postsAllService(req.query);
     res.json(postsData);
   } catch (e) {
@@ -28,6 +28,7 @@ async function postLike(req, res, next) {
     next(e);
   }
 }
+
 async function postsCreate(req, res, next) {
   try {
     const errors = validationResult(req);
@@ -46,4 +47,16 @@ async function postsCreate(req, res, next) {
   }
 }
 
-module.exports = { postsAll, postLike, postsCreate };
+async function postDelete(req, res, next) {
+  try {
+    const user = req.user;
+    const postId = req.params.postId;
+    await postDeleteService(user, postId);
+
+    res.status(200).send('');
+  } catch (e) {
+    next(e);
+  }
+}
+
+module.exports = { postsAll, postLike, postsCreate, postDelete };

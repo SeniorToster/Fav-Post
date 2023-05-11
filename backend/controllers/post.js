@@ -1,10 +1,12 @@
 const { validationResult } = require('express-validator');
+
 const {
   postsAllService,
   likeService,
   postCreateService,
 } = require('../service/post-service');
 const { apiError } = require('../service/error-service');
+
 async function postsAll(req, res, next) {
   try {
     const postsData = await postsAllService();

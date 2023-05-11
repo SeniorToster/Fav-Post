@@ -98,10 +98,20 @@ async function usersService() {
 
   return users;
 }
+async function userFindService(userId) {
+  const user = await Users.findOne({ where: { id:userId } });
+
+  if (!user) {
+    throw apiError.badRequest('данный пользователь не найден');
+  }
+
+  return user;
+}
 
 module.exports = {
   registrationService,
   loginService,
   refreshService,
   usersService,
+  userFindService,
 };

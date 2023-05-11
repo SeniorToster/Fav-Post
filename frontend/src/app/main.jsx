@@ -11,6 +11,7 @@ import Login from '../pages/Auth/Login.jsx';
 import Registration from '../pages/Auth/Registration.jsx';
 import Layout from '../components/Layout/Layout';
 import Error404 from '../pages/Error404';
+import User from '../pages/User.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: 'registration',
         element: <Registration />,
+      },
+      {
+        path: 'user/:userId',
+        element: <User />,
       },
       {
         path: '*',

@@ -5,6 +5,7 @@ const {
   refreshService,
   loginService,
   usersService,
+  userFindService,
 } = require('../service/user-service');
 const { removeToken } = require('../service/token-service');
 
@@ -93,10 +94,22 @@ async function usersAll(req, res, next) {
   }
 }
 
+async function userFind(req, res, next) {
+  try {
+    const userId = req?.params?.userId;
+    const userData = await userFindService(userId);
+
+    return res.json(userData);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   registrationUser,
   loginUser,
   logoutUser,
   refreshTokenUser,
   usersAll,
+  userFind,
 };

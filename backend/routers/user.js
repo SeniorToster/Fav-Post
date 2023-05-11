@@ -6,6 +6,7 @@ const {
   logoutUser,
   refreshTokenUser,
   usersAll,
+  userFind,
 } = require('../controllers/user');
 const authMiddleware = require('../middleware/auth-middleware');
 
@@ -27,6 +28,7 @@ router.post(
 router.get('/logout', logoutUser);
 router.get('/refresh', refreshTokenUser);
 router.get('/users', usersAll);
+router.get('/user/:userId', userFind);
 
 /* router.get('/userPosts', userPosts);
 router.get('/userLikes', userLikes); */

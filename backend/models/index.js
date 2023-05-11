@@ -42,11 +42,6 @@ Posts.belongsToMany(Users, {
   try {
     await sequelize.authenticate();
     console.log('Соединение успешно установлено.');
-
-    /*     const likeBD = await LikesPosts.findOne({
-      where: { postId: '1', userId: '90d1a437-417f-40d1-9de0-c7f0e98b5773' },
-    });
- */
   } catch (error) {
     console.error('Не удается подключиться к базе данных:', error);
   }

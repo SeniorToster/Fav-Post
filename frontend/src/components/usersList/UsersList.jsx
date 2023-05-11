@@ -12,7 +12,7 @@ function UsersList() {
     <Card title='Registered Users' style={{ width: 300 }}>
       <Space size={4} wrap={'true'}>
         {data.map(user => (
-          <Link key={user.id} as={`/user/:${user.id}`}>
+          <Link key={user.id} to={`/user/${user.id}`}>
             <Tag bordered={false}>{user.name}</Tag>
           </Link>
         ))}

@@ -33,7 +33,12 @@ export const authApiSlice = api.injectEndpoints({
         url: '/users',
         method: 'GET',
       }),
-      keepUnusedDataFor: 5,
+    }),
+    user: builder.query({
+      query: userId => ({
+        url: `/user/${userId}`,
+        method: 'GET',
+      }),
     }),
   }),
 });
@@ -43,9 +48,6 @@ export const {
   useRegistrationMutation,
   useRefreshQuery,
   useUsersQuery,
+  useUserQuery,
   useLazyLogoutQuery,
-} = authApiSlice;
-
-export const {
-  endpoints: { login, registration, refresh },
 } = authApiSlice;

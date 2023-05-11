@@ -9,6 +9,17 @@ const postApiSlice = api.injectEndpoints({
       }),
       providesTags: ['post'],
     }),
+    postsUser: builder.query({
+      query: ({ userId, isLiked }) => ({
+        url: '/posts',
+        method: 'GET',
+        params: {
+          userId,
+          isLiked,
+        },
+      }),
+      providesTags: ['liked'],
+    }),
     postCreate: builder.mutation({
       query: post => ({
         url: '/post',
@@ -28,12 +39,14 @@ const postApiSlice = api.injectEndpoints({
         url: `/post/liked/${postId}`,
         method: 'POST',
       }),
+      invalidatesTags: ['liked'],
     }),
   }),
 });
 
 export const {
   usePostsQuery,
+  usePostsUserQuery,
   usePostCreateMutation,
   usePostLikedMutation,
   usePostDeleteMutation,

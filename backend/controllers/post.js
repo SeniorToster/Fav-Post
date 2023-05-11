@@ -9,7 +9,8 @@ const { apiError } = require('../service/error-service');
 
 async function postsAll(req, res, next) {
   try {
-    const postsData = await postsAllService();
+    console.log(req.query);
+    const postsData = await postsAllService(req.query);
     res.json(postsData);
   } catch (e) {
     next(e);

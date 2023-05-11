@@ -1,5 +1,5 @@
 import { Button, Card, Form, Space, Typography } from 'antd';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import styles from './auth.module.scss';
 import { useLoginMutation } from '../../features/auth/authApiSlice';
@@ -7,7 +7,7 @@ import { useLoginMutation } from '../../features/auth/authApiSlice';
 import InputEmail from '../../components/UI/InputEmail';
 import InputPass from '../../components/UI/InputPass';
 import Alert from '../../components/UI/Alert';
-import useAuth from '../../features/hook/useAuth';
+import useAuth from '../../hook/useAuth';
 
 function Login() {
   const [login] = useLoginMutation();

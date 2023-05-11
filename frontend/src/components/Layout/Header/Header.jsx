@@ -25,10 +25,14 @@ function CustomHeader() {
       <Space>
         {user ? (
           <>
-            <Avatar gap={'4'}>{user.name[0].toUpperCase()}</Avatar>
-            <Typography.Title style={{ margin: '0' }} level={4}>
-              {user.name}
-            </Typography.Title>
+            <Link to={`/user/${user.id}`}>
+              <Space>
+                <Avatar gap={'4'}>{user.name[0].toUpperCase()}</Avatar>
+                <Typography.Title style={{ margin: '0' }} level={4}>
+                  {user.name}
+                </Typography.Title>
+              </Space>
+            </Link>
             <Button
               onClick={logoutHandle}
               icon={<LogoutOutlined />}

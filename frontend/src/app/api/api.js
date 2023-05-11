@@ -36,6 +36,6 @@ const fetchBaseWithReauth = async (args, api, extraOptions) => {
 export const api = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseWithReauth,
-  tagTypes: ['post'],
+  tagTypes: ['post', 'liked'],
   endpoints: builder => ({}),
 });

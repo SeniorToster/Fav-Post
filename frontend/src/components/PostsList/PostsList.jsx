@@ -1,15 +1,19 @@
 import { Space, Spin } from 'antd';
-import { usePostsQuery } from '../../features/post/postApiSlice';
+import PropTypes from 'prop-types';
+
 import Post from '../Post/Post';
 
-function PostsList() {
-  const { data, isLoading, isFetching } = usePostsQuery();
-  console.log(data);
-  if (isLoading || isFetching) return <Spin />;
+PostsList.propTypes = {
+  list: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
+
+function PostsList({ list, loading }) {
+  if (loading) return <Spin />;
 
   return (
-    <Space direction='vertical' size={16}>
-      {data.map(post => (
+    <Space direction='vertical' size={16} style={{ width: '100%' }}>
+      {list.map(post => (
         <Post key={post.id} {...post} />
       ))}
     </Space>

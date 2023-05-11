@@ -1,7 +1,18 @@
 import { Avatar, Card, Space, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+
 import ButtonLike from '../UI/ButtonLike';
+
+Post.propTypes = {
+  id: PropTypes.string.isRequired,
+  ownerUser: PropTypes.object.isRequired,
+  created_At: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  likes: PropTypes.array.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 function Post({ id, ownerUser, created_At, description, likes, title }) {
   return (

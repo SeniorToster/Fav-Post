@@ -1,14 +1,36 @@
 const uuid = require('uuid');
-const { Posts, LikesPosts } = require('../models');
-const { apiError } = require('./error-service');
+const { Posts, LikesPosts, Users } = require('../models');
 
-async function postsAllService() {
-  const post = await Posts.findAll({
-    order: [['created_At', 'DESC']],
-    include: ['ownerUser', 'likes'],
-  });
-
-  return post;
+async function postsAllService({ userId, isLiked }) {
+  if (userId) {
+    if (isLiked) {
+      const posts = await Posts.findAll({
+        include: [
+          {
+            model: Users,
+            as: 'likes',
+            where: {
+              id: userId,
+            },
+          },
+          'ownerUser',
+        ],
+      });
+      return posts;
+    }
+    const posts = await Posts.findAll({
+      where: { owner_post: userId },
+      order: [['created_At', 'DESC']],
+      include: ['ownerUser', 'likes'],
+    });
+    return posts;
+  } else {
+    const posts = await Posts.findAll({
+      order: [['created_At', 'DESC']],
+      include: ['ownerUser', 'likes'],
+    });
+    return posts;
+  }
 }
 
 async function likeService(user, postId) {

@@ -1,7 +1,7 @@
 import { Button, Card, Form, Space } from 'antd';
 
 import styles from './auth.module.scss';
-import useAuth from '../../features/hook/useAuth';
+import useAuth from '../../hook/useAuth';
 import { useRegistrationMutation } from '../../features/auth/authApiSlice';
 
 import InputEmail from '../../components/UI/InputEmail';

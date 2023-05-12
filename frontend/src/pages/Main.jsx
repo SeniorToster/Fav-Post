@@ -1,6 +1,6 @@
 import { Col, Row, Space } from 'antd';
 import PostsList from '../components/PostsList/PostsList';
-import UsersList from '../components/usersList/usersList';
+import UsersList from '../components/UsersList/UsersList';
 import PostCreate from '../components/PostCreate/PostCreate';
 
 import { usePostsQuery } from '../features/post/postApiSlice';

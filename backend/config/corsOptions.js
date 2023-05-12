@@ -1,6 +1,12 @@
 const { apiError } = require('../service/error-service');
 
-const whitelist = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+const whitelist = [
+  'http://localhost:5173',
+  'http://localhost:6000',
+  'http://127.0.0.1:5173',
+  'http://authgit.1293863-co27853.tw1.ru',
+  'http://1293863-co27853.tw1.ru',
+];
 
 exports.corsOptions = {
   origin: function (origin, callback) {

@@ -23,7 +23,6 @@ async function postsAllService({ userId, isLiked }) {
       const like = posts.filter(post =>
         post.likes.some(like => like.id === userId)
       );
-      console.log(like);
       return like;
     }
     return posts.filter(post => post.owner_post === userId);
@@ -41,7 +40,13 @@ async function likeService(user, postId) {
     await likeBD.destroy();
     const { likes } = await Posts.findOne({
       where: { id: postId },
-      include: ['likes'],
+      include: [
+        {
+          model: Users,
+          as: 'likes',
+          attributes: ['id', 'name'],
+        },
+      ],
     });
 
     return likes;
@@ -51,7 +56,13 @@ async function likeService(user, postId) {
   await LikesPosts.create({ id, postId, userId: user.id });
   const { likes } = await Posts.findOne({
     where: { id: postId },
-    include: ['likes'],
+    include: [
+      {
+        model: Users,
+        as: 'likes',
+        attributes: ['id', 'name'],
+      },
+    ],
   });
 
   return likes;

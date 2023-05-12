@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { actionsAuth } from '../../features/auth/authSlice';
 
 const fetchBase = fetchBaseQuery({
-  baseUrl: 'http://localhost:3000/api/',
+  baseUrl: 'http://apiauthgit.1293863-co27853.tw1.ru/api/',
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.tokenAccess;

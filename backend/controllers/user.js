@@ -22,8 +22,6 @@ async function registrationUser(req, res, next) {
     res.cookie('refreshToken', userData.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      secure: true,
-      sameSite: 'None',
     });
 
     return res.json(userData);
@@ -45,8 +43,6 @@ async function loginUser(req, res, next) {
     res.cookie('refreshToken', userData.refreshToken, {
       maxAge: 30 * 24 * 60 * 60 * 1000,
       httpOnly: true,
-      secure: true,
-      sameSite: 'None',
     });
 
     return res.json(userData);
@@ -75,8 +71,6 @@ async function refreshTokenUser(req, res, next) {
 
     res.cookie('refreshToken', userData.refreshToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'None',
       maxAge: 24 * 60 * 60 * 1000,
     });
     return res.json(userData);

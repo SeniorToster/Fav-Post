@@ -7,7 +7,7 @@ const postApiSlice = api.injectEndpoints({
         url: '/posts',
         method: 'GET',
       }),
-      keepUnusedDataFor: 5,
+      keepUnusedDataFor: 1,
       providesTags: ['post'],
     }),
     postsUser: builder.query({

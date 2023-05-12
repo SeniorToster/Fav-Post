@@ -10,10 +10,8 @@ MyPost.propTypes = {
 };
 
 function MyPost({ userId, isLiked }) {
-  console.log(userId, isLiked);
   const { data = [], isLoading } = usePostsUserQuery({ userId, isLiked });
-  console.log(isLoading);
-  console.log(data);
+
   if (isLoading) return <Spin />;
 
   return <PostsList list={data} loading={isLoading} />;

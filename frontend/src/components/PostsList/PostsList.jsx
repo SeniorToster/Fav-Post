@@ -11,7 +11,6 @@ PostsList.propTypes = {
 function PostsList({ list, loading }) {
   if (loading) return <Spin />;
   if (!list.length) return <Empty />;
-  console.log(list);
   return (
     <Space direction='vertical' size={16} style={{ width: '100%' }}>
       {list.map(post => (

@@ -11,6 +11,7 @@ function Footer() {
           textAlign: 'center',
           backgroundColor: '#141414',
           paddingBottom: '24px',
+          flex: '0 0 auto',
         }}
       >
         <Link href='https://github.com/SeniorToster/auth'>

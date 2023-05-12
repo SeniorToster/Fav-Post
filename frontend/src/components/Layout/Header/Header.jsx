@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionsAuth, selectUser } from '../../../features/auth/authSlice';
 import { useLazyLogoutQuery } from '../../../features/auth/authApiSlice';
 
-function CustomHeader() {
+function Header() {
   const user = useSelector(selectUser);
   const [logoutTrigger] = useLazyLogoutQuery();
   const dispatch = useDispatch();
@@ -62,4 +62,4 @@ function CustomHeader() {
   );
 }
 
-export default CustomHeader;
+export default Header;

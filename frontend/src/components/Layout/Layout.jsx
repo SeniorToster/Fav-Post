@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router';
-import CustomHeader from './Header/Header';
 import { Layout, Spin } from 'antd';
-import { Content } from 'antd/es/layout/layout';
-import { useRefreshQuery } from '../../features/auth/authApiSlice';
 import { useDispatch } from 'react-redux';
-import { actionsAuth } from '../../features/auth/authSlice';
 import { useEffect } from 'react';
+
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
+
+import { actionsAuth } from '../../features/auth/authSlice';
+import { useRefreshQuery } from '../../features/auth/authApiSlice';
 
 function CustomLayout() {
   const { data, isSuccess, isLoading } = useRefreshQuery();
@@ -15,7 +17,7 @@ function CustomLayout() {
     if (isSuccess) {
       dispatch(actionsAuth.setCredential({ ...data }));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess]);
 
   return (
@@ -32,10 +34,9 @@ function CustomLayout() {
         <Spin size='large' />
       ) : (
         <>
-          <CustomHeader />
-          <Content>
-            <Outlet />
-          </Content>
+          <Header />
+          <Outlet />
+          <Footer />
         </>
       )}
     </Layout>

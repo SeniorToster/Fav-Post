@@ -3,6 +3,7 @@ const { Posts, LikesPosts, Users } = require('../models');
 
 async function postsAllService({ userId, isLiked }) {
   const posts = await Posts.findAll({
+    order: [['created_At', 'DESC']],
     include: [
       {
         model: Users,

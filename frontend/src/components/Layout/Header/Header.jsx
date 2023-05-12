@@ -19,10 +19,11 @@ function CustomHeader() {
   return (
     <div className={styles.header}>
       <Link to={'/'}>
-        <Typography.Title level={1}>Employees</Typography.Title>
+        <Typography.Title level={1} style={{ margin: 0 }}>
+          Fav Post
+        </Typography.Title>
       </Link>
-
-      <Space>
+      <Space size='large'>
         {user ? (
           <>
             <Link to={`/user/${user.id}`}>

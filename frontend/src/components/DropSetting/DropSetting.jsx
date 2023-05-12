@@ -22,7 +22,7 @@ function DropSetting({ ownerUserId, postId }) {
         key: 'delete',
         danger: true,
         label: 'delete post',
-        disabled: ownerUserId !== user.id,
+        disabled: ownerUserId !== user?.id,
       },
     ],
     [user, ownerUserId]

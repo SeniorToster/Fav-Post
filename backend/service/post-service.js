@@ -2,33 +2,31 @@ const uuid = require('uuid');
 const { Posts, LikesPosts, Users } = require('../models');
 
 async function postsAllService({ userId, isLiked }) {
+  const posts = await Posts.findAll({
+    include: [
+      {
+        model: Users,
+        as: 'likes',
+        attributes: ['id', 'name'],
+      },
+      {
+        model: Users,
+        as: 'ownerUser',
+        attributes: ['id', 'name'],
+      },
+    ],
+  });
+
   if (userId) {
     if (isLiked) {
-      const posts = await Posts.findAll({
-        include: [
-          {
-            model: Users,
-            as: 'likes',
-            where: {
-              id: userId,
-            },
-          },
-          'ownerUser',
-        ],
-      });
-      return posts;
+      const like = posts.filter(post =>
+        post.likes.some(like => like.id === userId)
+      );
+      console.log(like);
+      return like;
     }
-    const posts = await Posts.findAll({
-      where: { owner_post: userId },
-      order: [['created_At', 'DESC']],
-      include: ['ownerUser', 'likes'],
-    });
-    return posts;
+    return posts.filter(post => post.owner_post === userId);
   } else {
-    const posts = await Posts.findAll({
-      order: [['created_At', 'DESC']],
-      include: ['ownerUser', 'likes'],
-    });
     return posts;
   }
 }
@@ -79,7 +77,13 @@ async function postDeleteService(user, postId) {
       id: postId,
       owner_post: user.id,
     },
-  })
+    include: ['likes'],
+  });
+  const liked = await LikesPosts.destroy({
+    where: {
+      postId: postId,
+    },
+  });
   return;
 }
 

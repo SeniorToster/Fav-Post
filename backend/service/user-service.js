@@ -99,7 +99,10 @@ async function usersService() {
   return users;
 }
 async function userFindService(userId) {
-  const user = await Users.findOne({ where: { id:userId } });
+  const user = await Users.findOne({
+    where: { id: userId },
+    attributes: ['id', 'name'],
+  });
 
   if (!user) {
     throw apiError.badRequest('данный пользователь не найден');

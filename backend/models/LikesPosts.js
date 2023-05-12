@@ -17,6 +17,7 @@ const LikesPosts = sequelize.define(
         model: Posts,
         key: 'id',
       },
+      onDelete: 'cascade',
     },
     userId: {
       type: DataTypes.STRING,
@@ -25,6 +26,7 @@ const LikesPosts = sequelize.define(
         model: Users,
         key: 'id',
       },
+      onDelete: 'cascade',
     },
   },
   {

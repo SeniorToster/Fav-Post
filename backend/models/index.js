@@ -33,6 +33,7 @@ Users.belongsToMany(Posts, {
   as: 'likes',
 });
 Posts.belongsToMany(Users, {
+  onDelete: 'CASCADE',
   through: LikesPosts,
   uniqueKey: 'id',
   as: 'likes',

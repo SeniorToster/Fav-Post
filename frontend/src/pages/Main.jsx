@@ -10,14 +10,14 @@ function Main() {
 
   return (
     <>
-      <Row gutter={[16, 0]} wrap={false}>
-        <Col flex='auto'>
+      <Row gutter={[16, 16]}>
+        <Col md={{ span: 18 }} xs={{ span: 24 }}>
           <Space direction='vertical' size={16} style={{ width: '100%' }}>
             <PostCreate />
             <PostsList list={data} loading={isLoading} />
           </Space>
         </Col>
-        <Col flex='none'>
+        <Col md={{ span: 6 }} xs={{ span: 24 }}>
           <UsersList />
         </Col>
       </Row>

@@ -25,7 +25,9 @@ function PostCreate() {
     user && (
       <Card>
         <div style={{ display: 'flex', width: '100%' }}>
-          <Avatar gap={4}>{user.name[0].toUpperCase()}</Avatar>
+          <Avatar style={{ flexShrink: 0 }} gap={4}>
+            {user.name[0].toUpperCase()}
+          </Avatar>
           <Form
             onFinish={onSubmitHandle}
             form={form}

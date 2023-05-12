@@ -9,7 +9,10 @@ function UsersList() {
   if (isLoading || isFetching) return <Spin />;
 
   return (
-    <Card title='Registered Users' style={{ width: 300 }}>
+    <Card
+      title='Registered Users'
+      style={{ width: '100%', marginBottom: '16px' }}
+    >
       <Space size={4} wrap={'true'}>
         {data.map(user => (
           <Link key={user.id} to={`/user/${user.id}`}>

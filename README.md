@@ -6,9 +6,9 @@ FullStack приложение c возможностью регистрации
 ## Стек технологий:
 ### Frontend:
 * React
-* Redux ToolKit / RTC Query
+* Redux ToolKit / RTK Query
 * ReactRouter
-* UI Component Ant Desing
+* UI Components Ant Desing
 * Custom React Hooks
 * Sass, CSS modules
 
